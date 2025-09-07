@@ -1,0 +1,7 @@
+{
+  "name": "Narrative Forge",
+  "description": "Forge your own comic book narrative! Use your webcam to become the hero of an AI-generated story.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
