@@ -14,6 +14,7 @@ import {
 } from '../lib/actions'
 import useStore from '../lib/store'
 import imageData from '../lib/imageData'
+import modes from '../lib/modes.js'
 
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
@@ -74,6 +75,14 @@ export default function App() {
     setTimeout(() => setDidJustSnap(false), 1000)
   }
 
+  const handleModeSelect = modeKey => {
+    const mode = modes[modeKey]
+    if (mode) {
+      setPersona(mode.persona)
+      setNarrative(mode.narrative)
+    }
+  }
+
   const hasGeneratedFrames =
     storyFrames.length > 0 && storyFrames.some(f => f.output)
 
@@ -130,6 +139,21 @@ export default function App() {
         </div>
         <div className="narrative-section">
           <h2>Step 2: Forge Your Narrative</h2>
+
+          <label>Get Inspired</label>
+          <div className="mode-selector">
+            {Object.entries(modes).map(([key, {name, emoji}]) => (
+              <button
+                key={key}
+                className="button mode-button"
+                onClick={() => handleModeSelect(key)}
+                title={`Load ${name} persona and story`}
+              >
+                <span className="emoji">{emoji}</span> {name}
+              </button>
+            ))}
+          </div>
+
           <label>Persona</label>
           <input
             type="text"
@@ -162,7 +186,6 @@ export default function App() {
       return null
     }
 
-    const exportButtonText = isExporting ? 'Exporting...' : 'Export'
     return (
       <div className="export-controls">
         <button className="button" onClick={exportToPng} disabled={isExporting}>

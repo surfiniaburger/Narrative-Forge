@@ -359,6 +359,30 @@ main {
   flex: 1;
 }
 
+.mode-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mode-button {
+  background: #e0e0e0;
+  padding: 8px 12px;
+  text-transform: none; /* override .button style */
+}
+
+.mode-button:hover {
+  background: #ffd600;
+}
+
+.mode-button .emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
 .generate-button {
   width: 100%;
   padding-top: 15px;

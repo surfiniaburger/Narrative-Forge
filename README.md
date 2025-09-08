@@ -11,11 +11,46 @@ Narrative Forge is an interactive web application that empowers users to create 
 3.  **Generate Story:** With a click of a button, Narrative Forge sends your image, persona, and story prompts to a generative AI model.
 4.  **View Your Comic:** The AI generates a unique, comic book-style image for each line of your narrative, maintaining your likeness across the panels. The resulting storyboard is displayed at the bottom of the screen.
 
+## Setup and Running Locally
+
+### Prerequisites
+*   A Google Gemini API key.
+*   A local web server. [Node.js](https://nodejs.org/) users can easily install `serve` via `npm`.
+
+### Installation & Setup
+
+1.  **Clone or download the project files.**
+
+2.  **Set up your API Key:**
+    The application loads the Gemini API key from the server's environment variables. You will need to configure this on the server you use to host the files. For local development, you can use a tool that loads `.env` files.
+
+3.  **Start a local server:**
+    This project uses modern browser features like import maps and can be run without a complex build step. Simply serve the project's root directory with any static file server.
+
+    If you have Node.js installed, you can use the `serve` package for a quick setup:
+    ```bash
+    # Install serve globally
+    npm install -g serve
+
+    # Run the server from the project's root directory
+    serve
+    ```
+
+4.  **Open the application:**
+    Once the server is running, open your web browser and navigate to the local address it provides (e.g., `http://localhost:3000`).
+
 ---
 
 ## Development Changelog
 
 This log is maintained to track significant changes, architectural decisions, and bug fixes to avoid regressions and repetitive work.
+
+### UI Layout Refinement & GIF Export Enhancements
+
+*   **Fixed Result Panel Overflow:** Resolved a UI bug where the export buttons could overlap with the generated comic strip.
+    *   **Action:** The results panel was re-architected using a horizontal flexbox layout. The "Export" buttons have been moved to a dedicated sidebar on the right, providing a cleaner, more organized interface and preventing any future layout conflicts. The comic strip is now horizontally scrollable to accommodate a large number of frames.
+*   **Improved GIF Export Quality:** The GIF export functionality was significantly upgraded to produce more professional and consistent animations.
+    *   **Action:** All frames are now normalized to a 512x512 pixel canvas. A letterboxing technique has been implemented to ensure that images of varying aspect ratios are contained within the frame without being cropped, filling the excess space with a white background. This results in a smoother viewing experience without jarring size changes.
 
 ### Prompt Engineering & Default Story Update
 
