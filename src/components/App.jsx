@@ -8,7 +8,9 @@ import {
   setBaseImage,
   setPersona,
   setNarrative,
-  generateStory
+  generateStory,
+  exportToGif,
+  exportToPng
 } from '../lib/actions'
 import useStore from '../lib/store'
 import imageData from '../lib/imageData'
@@ -22,6 +24,7 @@ export default function App() {
   const narrative = useStore.use.narrative()
   const storyFrames = useStore.use.storyFrames()
   const isGeneratingStory = useStore.use.isGeneratingStory()
+  const isExporting = useStore.use.isExporting()
 
   const [videoActive, setVideoActive] = useState(false)
   const [didInitVideo, setDidInitVideo] = useState(false)
@@ -70,6 +73,9 @@ export default function App() {
     setDidJustSnap(true)
     setTimeout(() => setDidJustSnap(false), 1000)
   }
+
+  const hasGeneratedFrames =
+    storyFrames.length > 0 && storyFrames.some(f => f.output)
 
   const renderWebcamView = () => (
     <div className="video">
@@ -151,6 +157,26 @@ export default function App() {
     </div>
   )
 
+  const renderExportControls = () => {
+    if (!hasGeneratedFrames || isGeneratingStory) {
+      return null
+    }
+
+    const exportButtonText = isExporting ? 'Exporting...' : 'Export'
+    return (
+      <div className="export-controls">
+        <button className="button" onClick={exportToPng} disabled={isExporting}>
+          <span className="icon">download</span>
+          {isExporting ? 'Exporting...' : 'Export Comic (PNG)'}
+        </button>
+        <button className="button" onClick={exportToGif} disabled={isExporting}>
+          <span className="icon">gif</span>
+          {isExporting ? 'Exporting...' : 'Export GIF'}
+        </button>
+      </div>
+    )
+  }
+
   return (
     <main>
       {!baseImage ? renderWebcamView() : renderStoryBuilder()}
@@ -175,6 +201,7 @@ export default function App() {
                 </li>
               )}
         </ul>
+        {renderExportControls()}
       </div>
     </main>
   )

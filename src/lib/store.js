@@ -17,7 +17,8 @@ export default createSelectorFunctions(
 Outsmarts a lurking alien creature.
 Escapes in their spaceship.`,
       storyFrames: [],
-      isGeneratingStory: false
+      isGeneratingStory: false,
+      isExporting: false
     }))
   )
 )

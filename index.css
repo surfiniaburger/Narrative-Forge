@@ -233,22 +233,29 @@ main {
 }
 .results {
   display: flex;
+  align-items: center;
+  gap: 15px;
   position: relative;
-  height: clamp(200px, 25dvh, 300px);
+  height: clamp(250px, 35dvh, 450px);
   border-top: 3px solid #000;
   padding: 15px;
-  overflow: auto;
+  overflow: hidden;
   background: #eee;
 }
 .results ul {
   display: flex;
   gap: 15px;
+  flex: 1;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 .results li {
   aspect-ratio: 1;
   height: 100%;
   transition: opacity 0.3s, transform 0.2s;
   position: relative;
+  flex-shrink: 0;
 }
 .results li .photo {
   border-radius: 8px;
@@ -358,4 +365,16 @@ main {
   padding-bottom: 15px;
   font-size: 20px;
   background: #ff6d00;
+}
+
+.export-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.export-controls .button {
+  background: #4caf50;
+  color: #fff;
 }
