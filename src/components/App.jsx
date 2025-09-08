@@ -10,7 +10,8 @@ import {
   setNarrative,
   generateStory,
   exportToGif,
-  exportToPng
+  exportToPng,
+  exportToVideo
 } from '../lib/actions'
 import useStore from '../lib/store'
 import imageData from '../lib/imageData'
@@ -26,6 +27,7 @@ export default function App() {
   const storyFrames = useStore.use.storyFrames()
   const isGeneratingStory = useStore.use.isGeneratingStory()
   const isExporting = useStore.use.isExporting()
+  const isExportingVideo = useStore.use.isExportingVideo()
 
   const [videoActive, setVideoActive] = useState(false)
   const [didInitVideo, setDidInitVideo] = useState(false)
@@ -85,6 +87,7 @@ export default function App() {
 
   const hasGeneratedFrames =
     storyFrames.length > 0 && storyFrames.some(f => f.output)
+  const isAnyExporting = isExporting || isExportingVideo
 
   const renderWebcamView = () => (
     <div className="video">
@@ -188,13 +191,30 @@ export default function App() {
 
     return (
       <div className="export-controls">
-        <button className="button" onClick={exportToPng} disabled={isExporting}>
+        <button
+          className="button"
+          onClick={exportToPng}
+          disabled={isAnyExporting}
+        >
           <span className="icon">download</span>
           {isExporting ? 'Exporting...' : 'Export Comic (PNG)'}
         </button>
-        <button className="button" onClick={exportToGif} disabled={isExporting}>
+        <button
+          className="button"
+          onClick={exportToGif}
+          disabled={isAnyExporting}
+        >
           <span className="icon">gif</span>
           {isExporting ? 'Exporting...' : 'Export GIF'}
+        </button>
+        <button
+          className="button"
+          onClick={exportToVideo}
+          disabled={isAnyExporting}
+          style={{background: '#f44336'}}
+        >
+          <span className="icon">movie</span>
+          {isExportingVideo ? 'Exporting...' : 'Export Video (MP4)'}
         </button>
       </div>
     )

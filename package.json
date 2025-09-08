@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@google/genai": "latest",
+    "@elevenlabs/elevenlabs-js": "latest",
     "auto-zustand-selectors-hook": "latest",
     "clsx": "latest",
     "gifenc": "1.0.3",
     "immer": "latest",
     "lodash.shuffle": "latest",
+    "mp4-muxer": "latest",
     "p-limit": "latest",
     "react": "latest",
     "react-dom": "latest",

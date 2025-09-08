@@ -18,7 +18,9 @@ Outsmarts a lurking alien creature.
 Escapes in their spaceship.`,
       storyFrames: [],
       isGeneratingStory: false,
-      isExporting: false
+      isExporting: false,
+      isExportingVideo: false,
+      elevenLabsApiKey: null
     }))
   )
 )
